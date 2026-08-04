@@ -1,0 +1,125 @@
+/* ==========================================================================
+   تطبيق الآلة الحاسبة الذكية - ملف التحريك والانيميشن (Animations CSS)
+   ========================================================================== */
+
+/* 1. انيميشن شاشة التحميل (App Splash / Loading Animation) */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: #090d16;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  gap: 20px;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  border: 4px solid rgba(245, 158, 11, 0.15);
+  border-left-color: #f59e0b;
+  border-radius: 50%;
+  animation: spin 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.loading-text {
+  color: #f8fafc;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: pulseText 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* 2. انيميشن ظهور الآلة الحاسبة عند الفتح (Fade In Up) */
+.calculator-card {
+  animation: appAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.history-card {
+  animation: appAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  opacity: 0;
+}
+
+@keyframes appAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 3. انيميشن تغيّر النتيجة (Result Scale Pulse) */
+.result-bounce {
+  animation: resultPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes resultPop {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 4. انيميشن المهتز عند حدوث خطأ (Error Shake) */
+.shake {
+  animation: shakeAnim 0.4s ease-in-out;
+}
+
+@keyframes shakeAnim {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+/* 5. انيميشن التموج اللمسي عند الضغط (Button Ripple Glow) */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn:active::after {
+  width: 120px;
+  height: 120px;
+  opacity: 1;
+  transition: 0s;
+}
